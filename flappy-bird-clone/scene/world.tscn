@@ -1,20 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://vkrklyqsgikn"]
+[gd_scene format=3 uid="uid://vkrklyqsgikn"]
 
 [ext_resource type="PackedScene" uid="uid://idnjxe63tfmh" path="res://scene/bird.tscn" id="1_pjass"]
 [ext_resource type="Script" uid="uid://db04nsvv1fw34" path="res://scripts/world.gd" id="1_txmk2"]
 [ext_resource type="PackedScene" uid="uid://dkr5qw1pllyra" path="res://scene/pipes.tscn" id="2_m5mgf"]
 [ext_resource type="PackedScene" uid="uid://71o10v2dvort" path="res://scene/floor.tscn" id="3_w4qq1"]
+[ext_resource type="PackedScene" uid="uid://d307qxr33eiob" path="res://scene/hud.tscn" id="4_emkrx"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=878794047]
 script = ExtResource("1_txmk2")
 pipe_scene = ExtResource("2_m5mgf")
 
-[node name="Bird" parent="." instance=ExtResource("1_pjass")]
+[node name="Bird" parent="." unique_id=1115065775 instance=ExtResource("1_pjass")]
 
-[node name="StartPos" type="Marker2D" parent="."]
+[node name="Hud" parent="." unique_id=1572661343 instance=ExtResource("4_emkrx")]
+
+[node name="StartPos" type="Marker2D" parent="." unique_id=1660314756]
 position = Vector2(100, 360)
 
-[node name="Floor" parent="." instance=ExtResource("3_w4qq1")]
+[node name="Floor" parent="." unique_id=525602749 instance=ExtResource("3_w4qq1")]
+position = Vector2(-1, 54)
 
-[node name="FloorPos" type="Marker2D" parent="."]
+[node name="FloorPos" type="Marker2D" parent="." unique_id=1235518020]
 position = Vector2(0, 650)
+
+[node name="PipeSpawner" type="Timer" parent="." unique_id=812830678]
+wait_time = 1.5
+autostart = true
+
+[node name="PipeContainer" type="Node2D" parent="." unique_id=2027591628]
+
+[connection signal="timeout" from="PipeSpawner" to="." method="_on_timer_timeout"]
